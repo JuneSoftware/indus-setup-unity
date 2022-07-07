@@ -68,8 +68,7 @@ async function installUnityHub() {
 
         unityHubPath = 'C:/Program Files/Unity Hub/Unity Hub.exe';
         if (!fs.existsSync(unityHubPath)) {
-            const installPath = path.join(_getTempDirectory(), "hub.exe")
-            const installerPath = await tc.downloadTool('https://public-cdn.cloud.unity3d.com/hub/prod/UnityHubSetup.exe', installPath);
+            const installerPath = await tc.downloadTool('https://public-cdn.cloud.unity3d.com/hub/prod/UnityHubSetup.exe');
             await execute(`"${installerPath}" /s`);
             await execute(`del "${installerPath}"`);
         }
@@ -205,11 +204,6 @@ function getInputAsArray(name, options) {
 
 function getInputAsBool(name, options) {
     return core.getInput(name, options).toLowerCase() === 'true';
-}
-
-function _getTempDirectory() {
-    const tempDirectory = process.env['RUNNER_TEMP'] || ''
-    return tempDirectory
 }
 
 run();
