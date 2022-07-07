@@ -69,7 +69,7 @@ async function installUnityHub() {
         unityHubPath = 'C:/Program Files/Unity Hub/Unity Hub.exe';
         if (!fs.existsSync(unityHubPath)) {
             const installerPath = await tc.downloadTool('https://public-cdn.cloud.unity3d.com/hub/prod/UnityHubSetup.exe');
-            await execute(`"${installerPath}" /s`);
+            await execute(`choco install unity-hub -y`);
             await execute(`del "${installerPath}"`);
         }
 
