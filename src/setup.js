@@ -3,7 +3,6 @@ const exec = require('@actions/exec');
 const tc = require('@actions/tool-cache');
 const path = require('path');
 const fs = require('fs');
-const path = 'path';
 
 async function run() {
     try {
