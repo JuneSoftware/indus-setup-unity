@@ -3,7 +3,6 @@ const exec = require('@actions/exec');
 const tc = require('@actions/tool-cache');
 const path = require('path');
 const fs = require('fs');
-import {ok} from 'assert'
 
 async function run() {
     try {
@@ -210,7 +209,6 @@ function getInputAsBool(name, options) {
 
 function _getTempDirectory() {
     const tempDirectory = process.env['RUNNER_TEMP'] || ''
-    ok(tempDirectory, 'Expected RUNNER_TEMP to be defined')
     return tempDirectory
 }
 
