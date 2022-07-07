@@ -3,6 +3,7 @@ const exec = require('@actions/exec');
 const tc = require('@actions/tool-cache');
 const path = require('path');
 const fs = require('fs');
+const path = 'path';
 
 async function run() {
     try {
@@ -68,12 +69,14 @@ async function installUnityHub() {
 
         unityHubPath = 'C:/Program Files/Unity Hub/Unity Hub.exe';
         if (!fs.existsSync(unityHubPath)) {
-            const installerPath = await tc.downloadTool('https://public-cdn.cloud.unity3d.com/hub/prod/UnityHubSetup.exe', "hub.exe");
+            const installPath = path.join(_getTempDirectory(), "hub.exe")
+            const installerPath = await tc.downloadTool('https://public-cdn.cloud.unity3d.com/hub/prod/UnityHubSetup.exe', installPath);
             await execute(`"${installerPath}" /s`);
             await execute(`del "${installerPath}"`);
         }
 
     }
+
     else throw new Error('Unknown plarform');
     return unityHubPath;
 }
@@ -203,6 +206,12 @@ function getInputAsArray(name, options) {
 
 function getInputAsBool(name, options) {
     return core.getInput(name, options).toLowerCase() === 'true';
+}
+
+function _getTempDirectory() {
+    const tempDirectory = process.env['RUNNER_TEMP'] || ''
+    ok(tempDirectory, 'Expected RUNNER_TEMP to be defined')
+    return tempDirectory
 }
 
 run();
