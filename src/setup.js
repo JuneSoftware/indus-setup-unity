@@ -117,12 +117,10 @@ async function findUnity(unityHubPath, unityVersion) {
     let unityPath = '';
     const output = await executeHub(unityHubPath, `editors --installed`);
     console.log('Installed editors ' + output);
+    console.log('Platform ' + process.platform);
     const match = output.match(new RegExp(`${unityVersion} , installed at (.+)`));
-    console.log('Matches ' + match.toString());
     if (match) {
         unityPath = match[1];
-        console.log('Unity Path ' + match[1]);
-        console.log('Platform ' + process.platform);
         if (unityPath && process.platform === 'darwin') {
             unityPath += '/Contents/MacOS/Unity';
         }
