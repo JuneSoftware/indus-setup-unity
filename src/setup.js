@@ -116,9 +116,6 @@ async function postInstall() {
 async function findUnity(unityHubPath, unityVersion) {
     let unityPath = '';
     const output = await executeHub(unityHubPath, `editors --installed`);
-    console.log('Installed editors ' + output);
-    console.log('Platform ' + process.platform);
-    console.log('Arch' + process.arch);
     const match = output.match(new RegExp(`${unityVersion}.*, installed at (.+)`));
     if (match) {
         unityPath = match[1];
