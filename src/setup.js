@@ -118,7 +118,8 @@ async function findUnity(unityHubPath, unityVersion) {
     const output = await executeHub(unityHubPath, `editors --installed`);
     console.log('Installed editors ' + output);
     console.log('Platform ' + process.platform);
-    const match = output.match(new RegExp(`${unityVersion} , installed at (.+)`));
+    console.log('Arch' + process.arch);
+    const match = output.match(new RegExp(`${unityVersion}.*, installed at (.+)`));
     if (match) {
         unityPath = match[1];
         if (unityPath && process.platform === 'darwin') {
