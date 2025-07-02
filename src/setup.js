@@ -178,8 +178,7 @@ async function executeHub(unityHubPath, args) {
     } else if (process.platform === 'darwin') {
         return await execute(`"${unityHubPath}" -- --headless ${args}`, true);
     } else if (process.platform === 'win32') {
-        // unityhub always return exit code 1
-        return await execute(`cmd/c "${unityHubPath}" -- --headless ${args}`, true);
+        return await execute(`cmd /c ""${unityHubPath}" -- --headless ${args}"`, true);
     }
 }
 
